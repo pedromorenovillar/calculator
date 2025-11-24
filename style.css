@@ -18,14 +18,21 @@ body {
 
 .result-display {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  margin-left: auto;
+  padding-right: 1.5em;
 }
 
 .result {
   background-color: beige;
-  padding: 2em;
-  width: auto;
+  color: black;
+  margin-top: 0.5em;
+  width: (75px + 5px) * 4;
+  height: 60px;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nums-and-operators {
@@ -35,7 +42,7 @@ body {
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 1em;
+  padding: 0.5em 1em 1em 1em;
   gap: 5px;
 }
 
@@ -52,9 +59,25 @@ body {
   box-shadow: 3px 4px 5px -3px rgba(0,0,0,0.4);
 }
 
+
 .buttons *:hover {
   background-color: red;
+  color: white;
 }
 .buttons *:active {
   background-color: purple;
+  color: white;
+}
+.buttons .equal {
+  background-color: blue;
+  color: white;
+}
+.buttons .equal:hover {
+  background-color: purple;
+  color: white;
+}
+
+.buttons .equal:active {
+  background-color: orange;
+  color: white;
 }
