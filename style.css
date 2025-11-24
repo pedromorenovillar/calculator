@@ -1,3 +1,60 @@
 body {
   background-color: bisque;
 }
+
+.content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  border-radius: 5px;
+  box-shadow: 7px 5px 8px -2px rgba(122,119,119,0.75);
+}
+
+.result-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.result {
+  background-color: beige;
+  padding: 2em;
+  width: auto;
+}
+
+.nums-and-operators {
+  display: flex;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1em;
+  gap: 5px;
+}
+
+.buttons * {
+  background-color: aqua;
+  width: 75px;
+  height: 60px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 3px 4px 5px -3px rgba(0,0,0,0.4);
+}
+
+.buttons *:hover {
+  background-color: red;
+}
+.buttons *:active {
+  background-color: purple;
+}
