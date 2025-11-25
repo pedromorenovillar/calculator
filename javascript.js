@@ -137,9 +137,3 @@ function clearResult() {
   firstNumber = ""
   resetValues();
 }
-
-numbers.forEach((number) => {
-  number.addEventListener("click", () => {
-    console.log('number pressed');
-  })
-})
