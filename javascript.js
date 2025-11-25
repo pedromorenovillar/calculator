@@ -1,94 +1,145 @@
 // DOM elements
-const result = document.querySelector(".result")
-const buttons = document.querySelectorAll("button")
+const result = document.querySelector(".result");
+const buttons = document.querySelectorAll("button");
+const equal = document.querySelector(".equal")
+const numbers = document.querySelectorAll(".number");
+
 
 // Variables
-let firstNumber = ""
-let secondNumber = ""
-let operator = ""
-let operatorCount = 0
+let firstNumber = "";
+let secondNumber = "";
+let operator = "";
+let isOperationReady = false;
 
 // Button event listener with switch statement
 buttons.forEach((button) => {
-  button.addEventListener("click", ()=> {
+  button.addEventListener("click", () => {
     switch (button.className) {
       case "clear":
-        clearResult()
+        clearResult();
         break;
       case "add":
-        operator = "+"
-        operatorCount++
+        if (secondNumber !== "") {
+          firstNumber = operate(firstNumber, secondNumber, operator);
+          operator = "+"
+        } else {
+          operator = "+";
+        }
         break;
       case "subtract":
-        operator = "-"
-        operatorCount++
+        if (secondNumber !== "") {
+          firstNumber = operate(firstNumber, secondNumber, operator);
+          operator = "-";
+        } else {
+          operator = "-";
+        }
         break;
       case "multiply":
-        operator = "x"
-        operatorCount++
+        if (secondNumber !== "") {
+          firstNumber = operate(firstNumber, secondNumber, operator);
+          operator = "*";
+        } else {
+          operator = "*";
+        }
         break;
       case "divide":
-        operator = "/"
-        operatorCount++
+        if (secondNumber !== "") {
+          firstNumber = operate(firstNumber, secondNumber, operator);
+          operator = "/";
+        } else {
+          operator = "/";
+        }
         break;
       case "equal":
-        a = parseInt(firstNumber)
-        b = parseInt(secondNumber)
-        result.textContent = operate(a, b, operator)
+        if (operator !== "" && secondNumber !== "") {
+          firstNumber = operate(firstNumber, secondNumber, operator);
+        }
         break;
-    
+
       default:
-        if(operatorCount === 0) {
-          firstNumber += button.innerText
-          result.textContent = firstNumber
-        } else if (operatorCount === 1) {
-          secondNumber += button.innerText
-          result.textContent = `${firstNumber} ${operator} ${secondNumber}`
+        if (operator === "") {
+          if (isOperationReady) {
+            firstNumber = "";
+            isOperationReady = false
+          }
+          firstNumber += button.innerText;
+          result.textContent = firstNumber;
+          equal.disabled = true
         } else {
-          // a = parseInt(firstNumber)
-          // b = parseInt(secondNumber)
-          // let newFirstNumber = operate(a, b, operator)
-          // firstNumber = newFirstNumber
-          // result.textContent = firstNumber
+          secondNumber += button.innerText;
+          result.textContent = `${firstNumber} ${operator} ${secondNumber}`;
+          equal.disabled = false
         }
         break;
     }
-    
-  })
-})
+  });
+});
 // Function switchboard
 function operate(a, b, operator) {
+  isOperationReady = true
+  a = parseInt(firstNumber);
+  b = parseInt(secondNumber);
   switch (operator) {
     case "+":
-      return add(a, b)
+      return add(a, b);
     case "-":
-      return subtract(a, b)
-    case "x":
-      return multiply(a, b)
+      return subtract(a, b);
+    case "*":
+      return multiply(a, b);
     case "/":
-      return divide(a, b)
-  
+      return divide(a, b);
+
     default:
       break;
   }
 }
 
-
 // Mathematical functions
-
-function clearResult() {
-  result.textContent = 0
-}
-
 function add(a, b) {
-  return a + b;
+  let addResult = Math.round((a + b) * 100) / 100;
+  result.textContent = addResult;
+  resetValues();
+  return addResult;
 }
 function subtract(a, b) {
-  return a - b;
+  let subtractResult = Math.round((a - b) * 100) / 100;;
+  result.textContent = subtractResult;
+  resetValues();
+  return subtractResult;
 }
 function multiply(a, b) {
-  return a * b;
+  let multiplyResult = Math.round(a * b * 100) / 100;
+  result.textContent = multiplyResult;
+  resetValues();
+  return multiplyResult;
 }
 function divide(a, b) {
-  return a / b;
+  if (b == 0) {
+    result.textContent = "Cannot divide by 0!";
+    resetValues();
+  } else {
+    let divideResult = Math.round(a / b * 100) / 100;
+    result.textContent = divideResult;
+    resetValues();
+    return divideResult;
+  }
 }
+
+
+// Helper functions
+function resetValues() {
+  secondNumber = "";
+  operator = "";
+}
+
+function clearResult() {
+  result.textContent = 0;
+  firstNumber = ""
+  resetValues();
+}
+
+numbers.forEach((number) => {
+  number.addEventListener("click", () => {
+    console.log('number pressed');
+  })
+})
