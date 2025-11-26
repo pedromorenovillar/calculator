@@ -3,6 +3,10 @@ const result = document.querySelector(".result");
 const buttons = document.querySelectorAll("button");
 const equal = document.querySelector(".equal")
 const numbers = document.querySelectorAll(".number");
+const back = document.querySelector(".back")
+const extra = document.querySelector(".extra")
+const dot = document.querySelector(".dot")
+const plusMinus = document.querySelector(".plus-minus")
 
 
 // Variables
@@ -74,6 +78,14 @@ buttons.forEach((button) => {
     }
   });
 });
+
+// Disable back, extra, point and +- buttons
+const disabledBtns = [back, extra, dot, plusMinus]
+disabledBtns.forEach((button) => {
+  button.disabled = true
+  button.classList = "disabledBtn"
+})
+
 // Function switchboard
 function operate(a, b, operator) {
   isOperationReady = true
@@ -136,4 +148,10 @@ function clearResult() {
   result.textContent = 0;
   firstNumber = ""
   resetValues();
+}
+
+function truncate(number) {
+  console.log(number.length);
+  
+  return number
 }
