@@ -41,17 +41,17 @@ buttons.forEach((button) => {
       case "multiply":
         if (secondNumber !== "") {
           firstNumber = operate(firstNumber, secondNumber, operator);
-          operator = "*";
+          operator = "×";
         } else {
-          operator = "*";
+          operator = "×";
         }
         break;
       case "divide":
         if (secondNumber !== "") {
           firstNumber = operate(firstNumber, secondNumber, operator);
-          operator = "/";
+          operator = "÷";
         } else {
-          operator = "/";
+          operator = "÷";
         }
         break;
       case "equal":
@@ -80,7 +80,7 @@ buttons.forEach((button) => {
 });
 
 // Disable back, extra, point and +- buttons
-const disabledBtns = [back, extra, dot, plusMinus]
+const disabledBtns = [back, extra, plusMinus]
 disabledBtns.forEach((button) => {
   button.disabled = true
   button.classList = "disabledBtn"
@@ -89,20 +89,20 @@ disabledBtns.forEach((button) => {
 // Function switchboard
 function operate(a, b, operator) {
   isOperationReady = true
-  a = parseInt(firstNumber);
-  b = parseInt(secondNumber);
+  a = parseFloat(firstNumber);
+  b = parseFloat(secondNumber);
   switch (operator) {
     case "+":
       return add(a, b);
     case "-":
       return subtract(a, b);
-    case "*":
+    case "×":
       return multiply(a, b);
-    case "/":
+    case "÷":
       return divide(a, b);
 
     default:
-      break;
+      return a;
   }
 }
 
@@ -127,7 +127,7 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   if (b == 0) {
-    result.textContent = "Cannot divide by 0!";
+    result.textContent = "Always 0!";
     resetValues();
   } else {
     let divideResult = Math.round(a / b * 100) / 100;
@@ -148,10 +148,4 @@ function clearResult() {
   result.textContent = 0;
   firstNumber = ""
   resetValues();
-}
-
-function truncate(number) {
-  console.log(number.length);
-  
-  return number
 }
